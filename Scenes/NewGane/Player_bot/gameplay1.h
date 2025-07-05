@@ -1,10 +1,11 @@
-#ifndef __GAMESETING_SCENE_H__
-#define __GAMESETING_SCENE_H__
+#ifndef __GAMEPLAY1_SCENE_H__
+#define __GAMEPLAY1_SCENE_H__
 
 #include "cocos2d.h"
 #include "ui/cocosGUI.h"
 
-class gameseting : public cocos2d::Scene
+
+class Gameplay1 : public cocos2d::Scene
 {
 public:
     static cocos2d::Scene* createScene();
@@ -19,10 +20,11 @@ private:
 
     void clickBtBack();
 
+
     cocos2d::ui::Button* btBack;
     
     // implement the "static create()" method manually
-    CREATE_FUNC(gameseting);
+    CREATE_FUNC(Gameplay1);
 };
 
 #endif // __CONTINUE_SCENE_H__

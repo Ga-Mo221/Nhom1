@@ -1,18 +1,20 @@
-﻿#include "Continue.h"
+﻿#include "Scenes/Continue/Continue.h"
 #include "ui/CocosGUI.h"
-#include "ChangeScene.h"
-#include "MainMenu.h"
+#include "Scenes/SceneManager/ChangeScene.h"
+#include "Scenes/MainMenu/MainMenu.h"
+#include "gameplay1.h"
+#include "AudioManager/AudioManager.h"
 
 USING_NS_CC;
 
-Scene* Continue::createScene()
+Scene* Gameplay1::createScene()
 {
-    return Continue::create();
+    return Gameplay1::create();
 }
 
 
 // on "init" you need to initialize your instance
-bool Continue::init()
+bool Gameplay1::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -20,6 +22,8 @@ bool Continue::init()
     {
         return false;
     }
+
+    AudioManager::playBackgroundMusic("nhacplay.mp3");
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -31,7 +35,7 @@ bool Continue::init()
 }
 
 
-void Continue::creatBackgroud(float x, float y) {
+void Gameplay1::creatBackgroud(float x, float y) {
     // nền
     auto bg = Sprite::create("BG.png");
     if (bg != nullptr) {
@@ -44,7 +48,7 @@ void Continue::creatBackgroud(float x, float y) {
     }
 }
 
-void Continue::createButton(float x, float y) {
+void Gameplay1::createButton(float x, float y) {
     btBack = ui::Button::create("backbt.png", "backbtsel.png");
     btBack->setScale(2.35);
     btBack->setPosition(Vec2(x - x * 0.8, y + y * 0.9));
@@ -53,10 +57,10 @@ void Continue::createButton(float x, float y) {
     this->addChild(btBack);
 }
 
-void Continue::clickBtBack() {
+void Gameplay1::clickBtBack() {
     btBack->addClickEventListener([](Ref* sender) {
-        CCLOG("da click back");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playBackgroundMusic("nhac.mp3");
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(MainMenu::createScene());
         });
 }

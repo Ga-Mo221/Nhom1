@@ -1,10 +1,10 @@
 ﻿#include "MainMenu.h"
 #include "ui/CocosGUI.h"
-#include "ChangeScene.h"
-#include "Continue.h"
-#include "NewGame.h"
-#include "Setting.h"
-#include "AudioManager.h"
+#include "Scenes/SceneManager/ChangeScene.h"
+#include "Scenes/Continue/Continue.h"
+#include "Scenes/NewGane/NewGame.h"
+#include "Scenes/Setting/Setting.h"
+#include "AudioManager/AudioManager.h"
 #include "audio/include/AudioEngine.h"
 
 USING_NS_CC;
@@ -33,9 +33,7 @@ bool MainMenu::init()
     creatBackgroud(visibleSize.width / 2, visibleSize.height / 2);
     createButton(visibleSize.width / 2, visibleSize.height / 2);
 
-    // play background music
-    AudioManager::init();
-    AudioManager::playBackgroundMusic("nhac.mp3");
+    
 
 
     clickBtContinue();
@@ -95,34 +93,28 @@ void MainMenu::createButton(float x, float y) {
 
 void MainMenu::clickBtContinue() {
     btcontinue->addClickEventListener([](Ref* sender) {
-        CCLOG("da click continue");
-        AudioManager::init();
-        AudioManager::playBackgroundMusic("nhacplay.mp3");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(Continue::createScene());
         });
 }
 
 void MainMenu::clickBtNewGame() {
     btnewgame->addClickEventListener([](Ref* sender) {
-        CCLOG("da click new game");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(NewGame::createScene());
         });
 }
 
 void MainMenu::clickBtSetting() {
     btsetting->addClickEventListener([](Ref* sender) {
-        CCLOG("da click setting");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(Setting::createScene());
         });
 }
 
 void MainMenu::clickBtExit() {
     btexit->addClickEventListener([](Ref* sender) {
-        CCLOG("da click exit");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         Director::getInstance()->end();
         });
 }

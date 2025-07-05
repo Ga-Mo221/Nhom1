@@ -1,13 +1,12 @@
-#pragma once
+#ifndef  _AUDIOMANAGER__H_
+#define  _AUDIOMANAGER__H_
+
 #include <string>
 
 class AudioManager {
 public:
     static void init();
-    static void setMusicID(int id);
     static void playBackgroundMusic(const std::string& file, bool loop = true);
-
-    static int getMusicID();
     static void setVolume(float volume);
     static float getVolume(); 
 
@@ -21,3 +20,5 @@ private:
     static float musicVolume;
     static float effectVolume; // ? New
 };
+
+#endif //_AUDIOMANAGER__H_

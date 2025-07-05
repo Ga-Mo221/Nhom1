@@ -1,6 +1,7 @@
 ﻿#include "ui/CocosGUI.h"
-#include "ChangeScene.h"
-#include "MainMenu.h"
+#include "Scenes/SceneManager/ChangeScene.h"
+#include "Scenes/MainMenu/MainMenu.h"
+#include "AudioManager/AudioManager.h"
 #include "NewGameV2.h"
 
 USING_NS_CC;
@@ -55,8 +56,7 @@ void NewGameV2::createButton(float x, float y) {
 
 void NewGameV2::clickBtBack() {
     btBack->addClickEventListener([](Ref* sender) {
-        CCLOG("da click back");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(MainMenu::createScene());
         });
 }

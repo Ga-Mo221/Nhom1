@@ -1,9 +1,10 @@
 ﻿#include "NewGame.h"
 #include "ui/CocosGUI.h"
-#include "ChangeScene.h"
-#include "MainMenu.h"
-#include "NewGameV1.h"
-#include "NewGameV2.h"
+#include "Scenes/SceneManager/ChangeScene.h"
+#include "Scenes/MainMenu/MainMenu.h"
+#include "Scenes/NewGane/Player_bot/NewGameV1.h"
+#include "Scenes/NewGane/Player_Player/NewGameV2.h"
+#include "AudioManager/AudioManager.h"
 
 USING_NS_CC;
 
@@ -78,21 +79,21 @@ void NewGame::createButton(float x, float y) {
 
 void NewGame::clickBtBack() {
     btBack->addClickEventListener([](Ref* sender) {
-        CCLOG("da click back");
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenesL(MainMenu::createScene());
         });
 }
 
 void NewGame::clickBtonePlayer() {
     btOnePlayer->addClickEventListener([](Ref* sender) {
-        CCLOG("da click one");
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenes(NewGameV1::createScene());
         });
 }
 
 void NewGame::clickBtTwoPlayer() {
     btTwoPlayer->addClickEventListener([](Ref* sender) {
-		CCLOG("da click two");
-		ChangeScene::ChangeScenes(NewGameV2::createScene());
+        AudioManager::playClickSound();
+        ChangeScene::ChangeScenes(NewGameV2::createScene());
         });
 }

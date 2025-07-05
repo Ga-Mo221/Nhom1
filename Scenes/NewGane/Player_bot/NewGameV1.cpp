@@ -1,9 +1,10 @@
 ﻿#include "NewGameV1.h"
 #include "ui/CocosGUI.h"
-#include "ChangeScene.h"
-#include "MainMenu.h"
-#include "NewGame.h"
-#include "gameplay1.h"
+#include "Scenes/SceneManager/ChangeScene.h"
+#include "Scenes/MainMenu/MainMenu.h"
+#include "Scenes/NewGane/NewGame.h"
+#include "Scenes/NewGane/Player_bot/gameplay1.h"
+#include "AudioManager/AudioManager.h"
 
 USING_NS_CC;
 
@@ -153,15 +154,14 @@ void NewGameV1::createButton(float x, float y) {
 
 void NewGameV1::clickBtBack() {
     btBack->addClickEventListener([](Ref* sender) {
-        CCLOG("da click back");
-        // Director::getInstance()->replaceScene(GameScene::createScene());
+        AudioManager::playClickSound();
         ChangeScene::ChangeScenesL(NewGame::createScene());
         });
 }
 
 void NewGameV1::clickBtEasy() {
     btEasy->addClickEventListener([this](Ref* sender) {
-		CCLOG("da click easy");
+        AudioManager::playClickSound();
         this->difficulty = "easy";
         LoadmodAI(this->difficulty);
         });
@@ -169,7 +169,7 @@ void NewGameV1::clickBtEasy() {
 
 void NewGameV1::clickBtNormal() {
     btNormal->addClickEventListener([this](Ref* sender) {
-		CCLOG("da click normal");
+        AudioManager::playClickSound();
         this->difficulty = "normal";
         LoadmodAI(this->difficulty);
         });
@@ -177,7 +177,7 @@ void NewGameV1::clickBtNormal() {
 
 void NewGameV1::clickBtHard() {
     btHard->addClickEventListener([this](Ref* sender) {
-		CCLOG("da click hard");
+        AudioManager::playClickSound();
         this->difficulty = "hard";
         LoadmodAI(this->difficulty);
         });
@@ -185,15 +185,15 @@ void NewGameV1::clickBtHard() {
 
 void NewGameV1::clickBtFlag1() {
 	btFlag1->addClickEventListener([this](Ref* sender) {
-		CCLOG("da click flag1");
-		this->flag = "flag1";
+        AudioManager::playClickSound();
+        this->flag = "flag1";
 		PickFlag(this->flag);
 		});
 }
 
 void NewGameV1::clickBtFlag2() {
     btFlag2->addClickEventListener([this](Ref* sender) {
-        CCLOG("da click flag2");
+        AudioManager::playClickSound();
         this->flag = "flag2";
         PickFlag(this->flag);
         });
@@ -201,7 +201,7 @@ void NewGameV1::clickBtFlag2() {
 
 void NewGameV1::clickBtMap1() {
     btMap1->addClickEventListener([this](Ref* sender) {
-        CCLOG("da click map1");
+        AudioManager::playClickSound();
         this->map = "5x6";
         LoadMap(this->map);
         });
@@ -209,7 +209,7 @@ void NewGameV1::clickBtMap1() {
 
 void NewGameV1::clickBtMap2() {
     btMap2->addClickEventListener([this](Ref* sender) {
-        CCLOG("da click map2");
+        AudioManager::playClickSound();
         this->map = "6x7";
         LoadMap(this->map);
         });
@@ -217,7 +217,7 @@ void NewGameV1::clickBtMap2() {
 
 void NewGameV1::clickBtMap3() {
     btMap3->addClickEventListener([this](Ref* sender) {
-        CCLOG("da click map3");
+        AudioManager::playClickSound();
         this->map = "7x8";
         LoadMap(this->map);
       });
@@ -225,8 +225,8 @@ void NewGameV1::clickBtMap3() {
 
 void NewGameV1::clickBtStats() {
     btStats->addClickEventListener([this](Ref* sender) {
-        CCLOG("da click stats");
-		ChangeScene::ChangeScenes(Gameplay1::createScene());
+        AudioManager::playClickSound();
+        ChangeScene::ChangeScenes(Gameplay1::createScene());
         });
 }
 
