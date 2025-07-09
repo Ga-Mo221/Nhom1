@@ -2,8 +2,8 @@
 #include "audio/include/AudioEngine.h"
 #include "base/CCUserDefault.h" 
 int AudioManager::musicID = -1;
-float AudioManager::musicVolume = 1.0f;
-float AudioManager::effectVolume = 1.0f;
+float AudioManager::musicVolume = 0;
+float AudioManager::effectVolume = 0.2f;
 
 void AudioManager::init() {
     musicVolume = cocos2d::UserDefault::getInstance()->getFloatForKey("musicVolume", 1.0f);

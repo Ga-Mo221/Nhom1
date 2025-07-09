@@ -1,4 +1,5 @@
 ﻿#include "GameManager.h"
+#include <CCPlatformMacros.h>
 
 GameManager* GameManager::s_instance = nullptr;
 
@@ -35,9 +36,13 @@ void GameManager::destroyInstance()
     }
 }
 
-void GameManager::startGame()
+void GameManager::startGame(GameMod mod)
 {
-    // Logic bắt đầu game
+	_mod = mod; // Lưu chế độ chơi
+    _rows = _mod.getRows();
+    _cols = _mod.getCols();
+
+    _board = vector<vector<int>>(_rows, vector<int>(_cols, 0));
 }
 
 void GameManager::restartGame()
@@ -60,24 +65,53 @@ void GameManager::endGame()
     // Logic kết thúc game
 }
 
-bool GameManager::dropToken(int col)
-{
-    // Người chơi thả quân vào cột -> tự động rơi xuống hàng thấp nhất
+bool GameManager::dropToken(int col){
+
+    if (col < 0 || col >= _cols || isColumnFull(col))
+        return false;
+
+    for (int row = _rows - 1; row >= 0; --row)
+    {
+		if (_board[row][col] == 0) // ở đây ô rỗng là 0 player 1 là 1 player 2 là 2, tương tự thì bot nõ cũng dống như player 2 là số 2
+        {
+            _board[row][col] = getCurrentPlayer(); 
+            return true;
+        }
+    }
+
     return false;
 }
 
-bool GameManager::isColumnFull(int col) const {
-    // Kiểm tra đã full cột đó chưa
+bool GameManager::isColumnFull(int col) const{
+
+    if (col < 0 || col >= _cols)
+        return true;
+
+	return _board[0][col] != 0;// nó check trực tiếp ô 0 của row 0 nếu ô này khác 0 thì cột này đã đầy
+
     return false;
 }
 
 bool GameManager::isBoardFull() const {
-    // kiểm tra toàn bộ bàn cờ đã full chưa
-    return false;
+
+    for (int col = 0; col < _cols; ++col)
+    {
+		if (!isColumnFull(col))// check từng cột nếu có cột nào không đầy thì return false nếu đã đầy thì return true
+            return false;
+    }
+
+    return true;
 }
 
 void GameManager::resetBoard() {
-    // xử lý xóa hết ball để người chơi chơi lại
+
+    for (int row = 0; row < _rows; ++row)
+    {
+        for (int col = 0; col < _cols; ++col)
+        {
+			_board[row][col] = 0; // Đặt lại tất cả ô về trạng thái rỗng
+        }
+    }
 }
 
 int GameManager::getCurrentPlayer() const {
@@ -105,9 +139,51 @@ int GameManager::getCellValue(int row, int col) const {
 }
 
 int GameManager::getRows() const {
-    return 0;
+    return _rows;
 }
 
 int GameManager::getCols() const {
-    return 0;
+    return _cols;
 }
+
+void GameManager::setclflag(string fl1) {
+    if (fl1 == "flag1")
+    {
+        flag1 = 1;
+        flag2 = 2;
+    }
+    else if (fl1 == "flag2")
+    {
+        flag1 = 2;
+        flag2 = 1;
+    }
+}
+
+void GameManager::setAI(const std::string& AI) {
+    if (AI == "easy" || AI == "normal" || AI == "hard")
+        _difficulty = AI;
+}
+
+std::string GameManager::getAI() const {
+    return _difficulty;
+}
+
+string GameManager::getNamePlayer1() const {
+    return _namePlayer1;
+}
+
+string GameManager::getNamePlayer2() const {
+    return _namePlayer2;
+}
+
+void GameManager::setnameplayer1(const std::string& name) {
+    
+	_namePlayer1 = name;
+    CCLOG("Name player 1 %s", _namePlayer1);
+}
+
+void GameManager::setnameplayer2(const std::string& name) {
+	_namePlayer2 = name;
+	CCLOG("Name player 2 %s", _namePlayer2);
+}
+

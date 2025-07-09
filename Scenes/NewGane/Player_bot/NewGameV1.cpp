@@ -5,6 +5,7 @@
 #include "Scenes/NewGane/NewGame.h"
 #include "Scenes/NewGane/Player_bot/gameplay1.h"
 #include "AudioManager/AudioManager.h"
+#include "GameManager/GameManager.h"
 
 USING_NS_CC;
 
@@ -164,6 +165,7 @@ void NewGameV1::clickBtEasy() {
         AudioManager::playClickSound();
         this->difficulty = "easy";
         LoadmodAI(this->difficulty);
+        GameManager::getInstance()->setAI("easy");
         });
 }
 
@@ -172,6 +174,7 @@ void NewGameV1::clickBtNormal() {
         AudioManager::playClickSound();
         this->difficulty = "normal";
         LoadmodAI(this->difficulty);
+        GameManager::getInstance()->setAI("normal");
         });
 }
 
@@ -180,6 +183,7 @@ void NewGameV1::clickBtHard() {
         AudioManager::playClickSound();
         this->difficulty = "hard";
         LoadmodAI(this->difficulty);
+        GameManager::getInstance()->setAI("hard");
         });
 }
 
@@ -188,6 +192,7 @@ void NewGameV1::clickBtFlag1() {
         AudioManager::playClickSound();
         this->flag = "flag1";
 		PickFlag(this->flag);
+		GameManager::getInstance()->setclflag(this->flag);
 		});
 }
 
@@ -196,6 +201,7 @@ void NewGameV1::clickBtFlag2() {
         AudioManager::playClickSound();
         this->flag = "flag2";
         PickFlag(this->flag);
+        GameManager::getInstance()->setclflag(this->flag);
         });
 }
 
@@ -204,6 +210,9 @@ void NewGameV1::clickBtMap1() {
         AudioManager::playClickSound();
         this->map = "5x6";
         LoadMap(this->map);
+        GameMod mod;
+        mod.setMod(GameMod::MODE_5x6);
+        GameManager::getInstance()->startGame(mod);
         });
 }
 
@@ -212,6 +221,9 @@ void NewGameV1::clickBtMap2() {
         AudioManager::playClickSound();
         this->map = "6x7";
         LoadMap(this->map);
+        GameMod mod;
+        mod.setMod(GameMod::MODE_6x7);
+        GameManager::getInstance()->startGame(mod);
         });
 }
 
@@ -220,6 +232,9 @@ void NewGameV1::clickBtMap3() {
         AudioManager::playClickSound();
         this->map = "7x8";
         LoadMap(this->map);
+        GameMod mod;
+        mod.setMod(GameMod::MODE_7x8);
+        GameManager::getInstance()->startGame(mod);
       });
 }
 

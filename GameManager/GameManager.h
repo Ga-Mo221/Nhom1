@@ -3,6 +3,8 @@
 
 #include "GameMod.h"
 #include <vector>
+#include <string>
+#include "cocos2d.h"
 
 using namespace std;
 
@@ -16,14 +18,14 @@ public:
     static void destroyInstance();
 
     // Quản Lý Game State
-    void startGame();         // Bắt đầu game
+    void startGame(GameMod mod);         // Bắt đầu game
     void restartGame();       // Chơi lại game
     void endGame();           // Kết thúc game
     void pauseGame();         // Tạm dừng
     void resumeGame();        // Tiếp tục
 
 
-    // Xử lý bàn cờ
+    // Xử lý bàn cờ // Done!
     bool dropToken(int col);                // Người chơi thả quân vào cột -> tự động rơi xuống hàng thấp nhất
     bool isColumnFull(int col) const;       // Kiểm tra cột đã đầy chưa
     bool isBoardFull() const;               // Kiểm tra toàn bộ bàn cờ đầy (hòa)
@@ -45,6 +47,20 @@ public:
     int getRows() const;
     int getCols() const;
 
+    void setclflag(string fl1);
+    int flag1 = 0;
+    int flag2 = 0;
+
+    void setAI(const std::string& AI); // dùng để lưu độ khó
+    std::string getAI() const;
+
+    string getNamePlayer1() const;
+    string getNamePlayer2() const;
+
+	void setnameplayer1(const std::string& name);
+	void setnameplayer2(const std::string& name);
+  
+
 private:
     GameMod _mod;
     int _rows;
@@ -58,8 +74,11 @@ private:
     GameManager(const GameManager&) = delete;
     GameManager& operator=(const GameManager&) = delete;
 
+    string _difficulty; 
+	string _namePlayer1 = "name1";
+	string _namePlayer2 = "name2";
 private:
     static GameManager* s_instance;
 };
 
-#endif//__GAME_MANAGER_H__
+#endif//__GAME_MANAGER_H__ 
